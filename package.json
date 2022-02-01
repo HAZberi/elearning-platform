@@ -1,0 +1,10 @@
+{
+  "name": "elearning-platform",
+  "version": "1.0.0",
+  "description": "A prototype online education marketplace",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hassaan Zuberi",
+  "license": "ISC"
+}
