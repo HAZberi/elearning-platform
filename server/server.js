@@ -15,9 +15,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// const connectDB = require('./db');
+const connectDB = require('./db');
 
-// connectDB();
+connectDB();
 
 const app = require('./app');
 
