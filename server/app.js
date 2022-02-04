@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const userRouter = require('./routes/userRouter');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -10,8 +11,6 @@ app.use(express.json());
 
 app.use(express.static(`${__dirname}/public`));
 
-//use morgan middleware to get descriptive information on every API request
-//in the console.
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
@@ -23,13 +22,8 @@ app.use((req, _, next) => {
   next();
 });
 
-//One way to add timestamp on every API request.
-app.use((req, _, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
-
 //router middlewares
+app.use('/api/v1/users', userRouter);
 
 //if user hits an undefined route
 app.all('*', (req, res, next) => {
