@@ -15,7 +15,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    h3: {
+    h4: {
       fontWeight: 500,
     }
   }

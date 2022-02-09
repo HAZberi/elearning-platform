@@ -14,6 +14,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   };
 
   const validationSchema = Yup.object({
@@ -24,15 +25,17 @@ const Register = () => {
     password: Yup.string("Enter your password")
       .min(8, "Password should be of minimum 8 characters length")
       .required("Password is required"),
+    confirmPassword: Yup.string("Please confirm your password")
+      .oneOf([Yup.ref("password")], "Passwords must be the same")
+      .required("Password confirmation is required"),
   });
 
   const handleSubmit = (
-    { name, email, password },
-    { setSubmitting, resetForm }
+    { name, email, password, confirmPassword },
+    { resetForm }
   ) => {
     setTimeout(() => {
-      setSubmitting(false);
-      console.table(name, email, password);
+      console.table(name, email, password, confirmPassword);
       resetForm();
     }, 2000);
   };
@@ -61,7 +64,7 @@ const Register = () => {
                 justifyContent="center"
               >
                 <Grid item sx={{ mt: 3, mb: 1, textAlign: "center" }}>
-                  <Typography variant="h3" component="h1" gutterBottom>
+                  <Typography variant="h4" component="h1" gutterBottom>
                     Register
                   </Typography>
                 </Grid>
@@ -101,6 +104,20 @@ const Register = () => {
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                     label="Password"
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item sx={{ mx: 4 }}>
+                  <TextField
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+                    error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                    helperText={touched.confirmPassword && errors.confirmPassword}
+                    label="Confirm Password"
                     variant="outlined"
                     fullWidth
                   />
