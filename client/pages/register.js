@@ -9,6 +9,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import apiCall from "../src/utils/apiConfig";
+
 const Register = () => {
   const initialValues = {
     name: "",
@@ -30,14 +32,14 @@ const Register = () => {
       .required("Password confirmation is required"),
   });
 
-  const handleSubmit = (
-    { name, email, password, confirmPassword },
-    { resetForm }
-  ) => {
-    setTimeout(() => {
-      console.table(name, email, password, confirmPassword);
-      resetForm();
-    }, 2000);
+  const handleSubmit = async ({ name, email, password }, { resetForm }) => {
+    const newUser = await apiCall.post("/user/register", {
+      name,
+      email,
+      password,
+    });
+    console.log(newUser.data.data);
+    resetForm();
   };
 
   return (
@@ -115,8 +117,12 @@ const Register = () => {
                     type="password"
                     value={values.confirmPassword}
                     onChange={handleChange}
-                    error={touched.confirmPassword && Boolean(errors.confirmPassword)}
-                    helperText={touched.confirmPassword && errors.confirmPassword}
+                    error={
+                      touched.confirmPassword && Boolean(errors.confirmPassword)
+                    }
+                    helperText={
+                      touched.confirmPassword && errors.confirmPassword
+                    }
                     label="Confirm Password"
                     variant="outlined"
                     fullWidth

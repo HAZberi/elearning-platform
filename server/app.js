@@ -26,7 +26,7 @@ app.use((req, _, next) => {
 });
 
 //router middlewares
-app.use('/api/v1/users', userRouter);
+app.use('/api/v1/user', userRouter);
 
 //if user hits an undefined route
 app.all('*', (req, res, next) => {

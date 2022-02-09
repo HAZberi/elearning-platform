@@ -1,8 +1,9 @@
 const catchAsync = require('../utils/catchAsync');
 
 exports.register = catchAsync(async (req, res, next) => {
-  res.status(200).json({
+  console.log(req.body);
+  res.status(201).json({
     status: 'success',
-    message: 'Hello World from the server side',
+    data: { ...req.body },
   });
 });
