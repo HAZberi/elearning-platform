@@ -33,12 +33,11 @@ const Register = () => {
   });
 
   const handleSubmit = async ({ name, email, password }, { resetForm }) => {
-    const newUser = await apiCall.post("/user/register", {
+    await apiCall.post("/user/register", {
       name,
       email,
       password,
     });
-    console.log(newUser.data.data);
     resetForm();
   };
 
