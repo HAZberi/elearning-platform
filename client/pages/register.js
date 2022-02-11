@@ -33,11 +33,16 @@ const Register = () => {
   });
 
   const handleSubmit = async ({ name, email, password }, { resetForm }) => {
-    await apiCall.post("/user/register", {
-      name,
-      email,
-      password,
-    });
+    try {
+      await apiCall.post("/user/register", {
+        name,
+        email,
+        password,
+      });
+    } catch (err) {
+      //UI Error Handling Required here
+      console.error(err);
+    }
     resetForm();
   };
 
