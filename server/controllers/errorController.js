@@ -8,7 +8,9 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateKeyDB = (err) => {
   //This function handles duplicate key when creating new documents.
-  const message = `Duplicate field value [${err.keyValue.name}]. Please use something else!`;
+  const message = `Duplicate field values found. ${JSON.stringify(
+    err.keyValue
+  )}`;
   return new AppError(message, 400);
 };
 

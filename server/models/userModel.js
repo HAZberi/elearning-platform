@@ -7,11 +7,12 @@ const userSchema = mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      required: [true, 'Please tell us your name'],
+      required: [true, 'Please tell us your name.'],
     },
     email: {
       type: String,
-      required: [true, 'Email address is required'],
+      required: [true, 'Email address is required.'],
+      unique: [true, 'Email address must be unique.'],
       trim: true,
       lowercase: true,
       validate: [validator.isEmail, 'Please enter a valid email address.'],
@@ -21,7 +22,7 @@ const userSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please enter an eight character password'],
+      required: [true, 'Please enter an eight character password.'],
       minlength: [8, 'Minimum password length is 8 characters.'],
       select: false,
     },
