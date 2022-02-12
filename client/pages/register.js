@@ -10,13 +10,14 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import apiCall from "../src/utils/apiConfig";
+import createErrorMsg from "../src/utils/errorMessageUI";
 
 const Register = () => {
   const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: "Hassaan",
+    email: "mhazuberi@gmail.com",
+    password: "1161001az",
+    confirmPassword: "1161001az",
   };
 
   const validationSchema = Yup.object({
@@ -41,7 +42,7 @@ const Register = () => {
       });
     } catch (err) {
       //UI Error Handling Required here
-      console.error(err);
+      console.log(createErrorMsg(err.response.data.message));
     }
     resetForm();
   };
