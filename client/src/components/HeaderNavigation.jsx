@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import Link from "../utils/Link";
 
-const pages = ["Home", "about", "login", "register"];
+const pages = ["Home", "About", "Login", "Register"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
@@ -83,7 +83,7 @@ const Header = () => {
                   key={page}
                   onClick={handleCloseNavMenu}
                   component={Link}
-                  href={page !== "Home" ? `/${page}` : "/"}
+                  href={page !== "Home" ? `/${page.toLowerCase()}` : "/"}
                 >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
