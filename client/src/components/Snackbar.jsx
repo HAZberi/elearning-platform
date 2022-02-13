@@ -1,16 +1,23 @@
 import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setSnackbar } from "../../store/slices/snackbar";
 
 export default function CustomizedSnackbar() {
-  const [open, setOpen] = React.useState(true);
+  const open = useSelector((state) => state.ui.snackbar.open);
+  const type = useSelector((state) => state.ui.snackbar.type);
+  const message = useSelector((state) => state.ui.snackbar.message);
+
+  const dispatch = useDispatch();
 
   const handleClose = (_, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
-    setOpen(false);
+    dispatch(setSnackbar({ open: false, type: "", message: "" }));
   };
 
   return (
@@ -24,9 +31,9 @@ export default function CustomizedSnackbar() {
         elevation={6}
         variant="filled"
         onClose={handleClose}
-        severity="success"
+        severity={type}
       >
-        This is a success message!
+        {message}
       </Alert>
     </Snackbar>
   );
