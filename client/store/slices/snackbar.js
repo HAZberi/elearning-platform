@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const snackbar = createSlice({
   name: "snackbar",
   initialState: {
-    open: true,
+    open: false,
     type: "",
     message: "",
   },

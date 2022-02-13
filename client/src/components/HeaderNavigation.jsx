@@ -111,7 +111,7 @@ const Header = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 LinkComponent={Link}
-                href={page !== "Home" ? `/${page}` : "/"}
+                href={page !== "Home" ? `/${page.toLowerCase()}` : "/"}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}

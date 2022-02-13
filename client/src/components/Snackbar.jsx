@@ -31,7 +31,7 @@ export default function CustomizedSnackbar() {
         elevation={6}
         variant="filled"
         onClose={handleClose}
-        severity={type}
+        severity={type || "success"}
       >
         {message}
       </Alert>

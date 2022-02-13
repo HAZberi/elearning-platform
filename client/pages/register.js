@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
@@ -9,10 +10,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { setSnackbar } from "../store/slices/snackbar";
 import apiCall from "../src/utils/apiConfig";
 import createErrorMsg from "../src/utils/errorMessageUI";
 
 const Register = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     name: "Hassaan",
     email: "mhazuberi@gmail.com",
@@ -42,7 +46,13 @@ const Register = () => {
       });
     } catch (err) {
       //UI Error Handling Required here
-      console.log(createErrorMsg(err.response.data.message));
+      dispatch(
+        setSnackbar({
+          open: true,
+          type: "error",
+          message: createErrorMsg(err.response.data.message),
+        })
+      );
     }
     resetForm();
   };
