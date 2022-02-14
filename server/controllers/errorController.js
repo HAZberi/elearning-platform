@@ -66,13 +66,15 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
     //FIX for unexpected Error Object behavior
-    //1. destructure the name of the Error directly from err object !!very important!!
-    const { name } = err;
+    //1. destructure the name and message of the Error directly from err object !!very important!!
+    const { name, message } = err;
     //2. create a deep copy of err object
     let error = { ...err };
-    //3. add destructured name from step 1 to newly created error object
-    if (name) error.name = name;
-
+    //3. add destructured name and message from step 1 to newly created error object
+    if (name) {
+      error.name = name;
+      error.message = message;
+    }
     if (error.name === 'CastError') error = handleCastErrorDB(error);
 
     if (error.code === 11000) error = handleDuplicateKeyDB(error);
