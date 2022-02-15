@@ -144,7 +144,7 @@ const Register = () => {
                     fullWidth
                   />
                 </Grid>
-                <Grid item sx={{ mx: 4, my: 4 }}>
+                <Grid item sx={{ mx: 4, my: 2 }}>
                   <Button
                     variant="contained"
                     type="submit"
@@ -164,11 +164,12 @@ const Register = () => {
         </Formik>
         <Grid container direction="column" justifyContent="center">
           <Grid item sx={{ textAlign: "center" }}>
-            <Link href="/login" underline="none">
-              <Typography variant="body1" gutterBottom>
-                ALREADY REGISTERED?
-              </Typography>
-            </Link>
+            <Typography variant="body1" gutterBottom>
+              Already Registered?{` `}
+              <Link href="/login" underline="none">
+                LOGIN
+              </Link>
+            </Typography>
           </Grid>
         </Grid>
       </Paper>
