@@ -13,6 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { setSnackbar } from "../store/slices/snackbar";
 import apiCall from "../src/utils/apiConfig";
 import createErrorMsg from "../src/utils/errorMessageUI";
+import Link from "../src/utils/Link";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const Register = () => {
 
   return (
     <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ my: 7, pb: 10 }}>
+      <Paper elevation={3} sx={{ my: 5, pb: 10 }}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -161,6 +162,15 @@ const Register = () => {
             </form>
           )}
         </Formik>
+        <Grid container direction="column" justifyContent="center">
+          <Grid item sx={{ textAlign: "center" }}>
+            <Link href="/login" underline="none">
+              <Typography variant="body1" gutterBottom>
+                ALREADY REGISTERED?
+              </Typography>
+            </Link>
+          </Grid>
+        </Grid>
       </Paper>
     </Container>
   );
