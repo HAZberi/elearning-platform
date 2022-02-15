@@ -20,6 +20,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [current, setCurrent] = React.useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -28,13 +29,30 @@ const Header = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event) => {
+    setCurrent(event.target.pathname);
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const setActiveNavStyle = (page) => {
+    //This function causes possible rendering performance issue. Two calls on one click.
+    if (
+      current === `/${page.toLowerCase()}` ||
+      (current === "/" && page === "Home")
+    ) {
+      return !anchorElNav ? "black" : "#eeeeee";
+    }
+    return "white";
+  };
+
+  React.useEffect(() => {
+    //You can also use "process.browser" in place of typeof window !== "undefined" to check if window is available or not;
+    typeof window !== "undefined" && setCurrent(window.location.pathname);
+  }, [typeof window !== "undefined" && window.location.pathname]);
 
   return (
     <AppBar position="static">
@@ -84,6 +102,7 @@ const Header = () => {
                   onClick={handleCloseNavMenu}
                   component={Link}
                   href={page !== "Home" ? `/${page.toLowerCase()}` : "/"}
+                  sx={{ backgroundColor: setActiveNavStyle(page) }}
                 >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -112,7 +131,12 @@ const Header = () => {
                 onClick={handleCloseNavMenu}
                 LinkComponent={Link}
                 href={page !== "Home" ? `/${page.toLowerCase()}` : "/"}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: setActiveNavStyle(page),
+                  display: "block",
+                }}
+                disableRipple
               >
                 {page}
               </Button>
