@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_ENV=development node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -18,7 +18,9 @@
     "@mui/material": "latest",
     "@reduxjs/toolkit": "^1.7.2",
     "axios": "^0.25.0",
+    "express": "^4.17.2",
     "formik": "^2.2.9",
+    "http-proxy-middleware": "^2.0.3",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
