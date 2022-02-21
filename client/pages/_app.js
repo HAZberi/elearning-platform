@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import { Provider as StoreProvider } from "react-redux";
 
-import confugureStore from "../store/configureStore";
+import store from "../store/storeConfig";
 import theme from "../src/theme";
 import createEmotionCache from "../src/utils/createEmotionCache";
 import Header from "../src/components/HeaderNavigation";
@@ -17,8 +17,6 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
-  const store = confugureStore();
 
   return (
     <CacheProvider value={emotionCache}>
