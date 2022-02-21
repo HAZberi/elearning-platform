@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { setUser } from "../store/slices/auth";
 import { setSnackbar } from "../store/slices/snackbar";
 import apiCall from "../src/utils/apiConfig";
 import createErrorMsg from "../src/utils/errorMessageUI";
@@ -33,12 +34,16 @@ const Login = () => {
   });
 
   const handleSubmit = async ({ email, password }, { resetForm }) => {
-    console.table(email, password);
     try {
-      await apiCall.post("/user/login", {
+      const response = await apiCall.post("/user/login", {
         email,
         password,
       });
+      dispatch(
+        setUser({
+          user: response.data.user,
+        })
+      );
     } catch (err) {
       //UI Error Handling Required here
       dispatch(
