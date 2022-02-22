@@ -20,7 +20,7 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  let persistor = persistStore(store);
+  const persistor = persistStore(store);
 
   return (
     <CacheProvider value={emotionCache}>
