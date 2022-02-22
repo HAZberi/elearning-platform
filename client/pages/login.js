@@ -2,6 +2,7 @@ import * as React from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
@@ -18,6 +19,8 @@ import Link from "../src/utils/Link";
 
 const Login = () => {
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const initialValues = {
     email: "mhazuberi@gmail.com",
@@ -44,6 +47,7 @@ const Login = () => {
           user: response.data.user,
         })
       );
+      router.push("/");
     } catch (err) {
       //UI Error Handling Required here
       dispatch(
