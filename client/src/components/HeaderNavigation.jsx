@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 import Link from "../utils/Link";
+import logout from "../utils/logout";
 
 const pages = ["Home", "About", "Login", "Register"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -34,7 +35,8 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (_, setting) => {
+    if (setting === "Logout") logout();
     setAnchorElUser(null);
   };
 
@@ -166,7 +168,10 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={(e) => handleCloseUserMenu(e, setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

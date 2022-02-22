@@ -12,9 +12,14 @@ const auth = createSlice({
       auth.user = action.payload.user;
       auth.isLoggedIn = true;
     },
+    logout: (auth, _) => {
+      auth.user = {};
+      auth.isLoggedIn = false;
+      auth.token = "";
+    },
   },
 });
 
-export const { setUser } = auth.actions;
+export const { setUser, logout } = auth.actions;
 
 export default auth.reducer;
